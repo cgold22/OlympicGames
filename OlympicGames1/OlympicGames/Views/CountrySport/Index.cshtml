@@ -1,0 +1,40 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model List<OlympicGames.Models.CountrySport>
+
+<h2>Olympic Games</h2>
+
+<div style="display: flex;">
+    <div style="margin-right: 20px; display: flex; flex-direction: column; width: 200px;">
+        <form method="get">
+            <label for="gameFilter">Filter by Game:</label>
+            <select id="gameFilter" name="selectedGame" onchange="this.form.submit()" style="width: 100%;">
+                <option value="ALL" selected="@(ViewBag.SelectedGame == "ALL" ? "selected" : null)">ALL</option>
+                <option value="Winter Olympics" selected="@(ViewBag.SelectedGame == "Winter Olympics" ? "selected" : null)">Winter Olympics</option>
+                <option value="Summer Olympics" selected="@(ViewBag.SelectedGame == "Summer Olympics" ? "selected" : null)">Summer Olympics</option>
+                <option value="Paralympics" selected="@(ViewBag.SelectedGame == "Paralympics" ? "selected" : null)">Paralympics</option>
+                <option value="Youth Olympic Games" selected="@(ViewBag.SelectedGame == "Youth Olympic Games" ? "selected" : null)">Youth Olympic Games</option>
+            </select>
+
+            <label for="typeFilter">Filter by Type:</label>
+            <select id="typeFilter" name="selectedType" onchange="this.form.submit()" style="width: 100%;">
+                <option value="ALL" selected="@(ViewBag.SelectedType == "ALL" ? "selected" : null)">ALL</option>
+                <option value="Indoor" selected="@(ViewBag.SelectedType == "Indoor" ? "selected" : null)">Indoor</option>
+                <option value="Outdoor" selected="@(ViewBag.SelectedType == "Outdoor" ? "selected" : null)">Outdoor</option>
+            </select>
+        </form>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap;">
+        @foreach (var sport in Model)
+        {
+            <div style="margin: 10px; text-align: center;">
+                <img src="@sport.FlagUrl" alt="@sport.Country"
+                     title="@sport.Country - @sport.Game - @sport.Type"
+                     style="width: 100px; height: auto;">
+                <p>@sport.Country</p>
+            </div>
+        }
+    </div>
+</div>
